@@ -1,21 +1,43 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<link rel="stylesheet" href="@{/styles.css}" th:href="@{/styles.css}">
-<meta name="viewport" content="width=device-width"/>
 
 <head>
+    <meta name="viewport" content="width=device-width"/>
     <title>BookClub.io</title>
+    <link rel="stylesheet" href="/css/styles.css" th:href="@{/css/styles.css}">
 </head>
 
-<div class="header">
-
+<body>
+<div class="logo">
+    <img th:src="@{/css/logo2.png}" alt="BookClub.io Logo">
 </div>
 
-<body>
+<h1>Welcome to BookClub.io</h1>
 
-"hello"
+<p>
+
+    Read More. Scroll Less.
+
+    In a world of endless scrolling, we believe in a different kind of power: the power of books. Books are humanity’s ultimate leverage. Imagine trying to build an operating system from scratch without access to decades of research—it could take a lifetime. But with a single book, you inherit the collective wisdom of thousands of minds, distilled into pages that propel you forward.
+    Books shape who we are. They spark ideas, shift perspectives, and leave imprints of warmth that last forever. What you consume shapes your mind—choose wisely.
+</p>
 
 
+<h4>  Join a Community of Readers & Thinkers </h4>
+<p>
+    Create "Spaces"—your personal hubs for diving into books, sharing reflections, or discussing chapters with friends. Post thoughts, debate ideas, or simply geek out over your latest read. This is your platform to learn, connect, and grow.
+</p>
+
+<h4>Ready to Expand your World?</h4>
+<p>
+    Sign up today. Bring your friends. Let’s trade mindless screens for meaningful stories.
+</p>
+
+<div class="button-container">
+    <a href="#" class="button">Contact Us</a>
+    <a href="#" class="button">Sign Up</a>
+    <a href="#" class="button">Login</a>
+</div>
 </body>
 
 </html>
