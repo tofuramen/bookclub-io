@@ -1,7 +1,8 @@
 package com.bookclub.bookclub.io;
 
-public class BookController {
-    public static void main(String[] args) {
+import org.springframework.stereotype.Controller;
 
-    }
+@Controller
+public class BookController {
+
 }

@@ -1,0 +1,34 @@
+services:
+  app:
+    build:
+      context: /Users/trahman/Downloads/bookclub.io
+      dockerfile: Dockerfile
+    container_name: springboot-app
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/bookclubdb
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+    ports:
+      - "8080:8080"  # Spring Boot app port
+    restart: always
+
+  postgres:
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: bookclubdb
+      POSTGRES_PASSWORD: Aini23!!!
+      POSTGRES_USER: bookadmin
+    image: postgres:15
+    ports:
+      - "5432:5432"  # PostgreSQL port
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+
+networks:
+  default:
