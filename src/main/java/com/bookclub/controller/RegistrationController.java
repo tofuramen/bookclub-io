@@ -1,16 +1,23 @@
 package com.bookclub.controller;
 
 import com.bookclub.model.User;
+import com.bookclub.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class RegistrationController {
+
+    UserService userService;
+
+    public RegistrationController(UserService userService) {
+        this.userService = userService;
+    }
 
     //this loads the html page and also adds a new User object to my model
     @RequestMapping("/register")
@@ -19,9 +26,28 @@ public class RegistrationController {
         return "register";
     }
 
+    @InitBinder
+    public void initBinder(WebDataBinder dataBinder) {
+
+        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+
+        dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
+    }
+
     @PostMapping("/register")
     public String confirmation(@Valid @ModelAttribute("user") User user, BindingResult result) {
+        if(result.hasErrors()){
+            // There are validation errors; return to the registration form.
+            return "register";
+        }
+
+        userService.registerUser(user);
         return "redirect:/confirmation";
+    }
+
+    @GetMapping("/confirmation")
+    public String confirmationPage() {
+        return "confirmation"; // Make sure you have a confirmation.html view.
     }
 
 

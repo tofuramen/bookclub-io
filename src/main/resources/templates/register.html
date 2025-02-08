@@ -7,13 +7,15 @@
     <link rel="stylesheet" href="/css/register.css" th:href="@{/css/register.css}">
 </head>
 
+<body>
+
+<div class="back-button">
+    <a href="http://localhost:8080/" class="back-button">Return Home</a>
+</div>
+
 <div class="register">
     <h1>Register  </h1>
 </div>
-
-<body>
-
-
 
 <!-- The form posts to /register (adjust the URL as needed) -->
 <form th:action="@{/register}" th:object="${user}" method="post">
