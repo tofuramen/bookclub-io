@@ -36,12 +36,17 @@ public class RegistrationController {
 
     @PostMapping("/register")
     public String confirmation(@Valid @ModelAttribute("user") User user, BindingResult result) {
+
         if(result.hasErrors()){
-            // There are validation errors; return to the registration form.
+            return "register";
+        }try {
+            userService.registerUser(user);
+        } catch (IllegalArgumentException e) {
+            // Associate the error with the "username" field (or globally)
+            result.rejectValue("username", "error.user", e.getMessage());
             return "register";
         }
 
-        userService.registerUser(user);
         return "redirect:/confirmation";
     }
 

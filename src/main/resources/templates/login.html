@@ -1,10 +1,45 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width"/>
+    <title>Sign Up Today</title>
+    <link rel="stylesheet" href="/css/register.css" th:href="@{/css/register.css}">
 </head>
+
 <body>
+
+<div class="back-button">
+    <a href="http://localhost:8080/" class="back-button">Return Home</a>
+</div>
+
+<div class="login">
+    <h1> Login </h1>
+</div>
+
+<!-- The form posts to /register (adjust the URL as needed) -->
+<form th:action="@{/login}" th:object="${loginForm}" method="post">
+
+    <!-- Username Field -->
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" th:field="*{username}" placeholder="Enter your username" />
+        <!-- Error message for username -->
+        <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+    </div>
+
+
+    <!-- Password Field -->
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" th:field="*{password}" placeholder="Enter your password" />
+        <!-- Error message for password -->
+        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="Login">Register</button>
+</form>
 
 </body>
 </html>
