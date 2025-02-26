@@ -49,3 +49,14 @@ CREATE TABLE IF NOT EXISTS discussion_replies (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+DO $$
+    BEGIN
+        IF NOT EXISTS (SELECT 1 FROM roles WHERE name = 'ROLE_USER') THEN
+            INSERT INTO roles (name) VALUES ('ROLE_USER');
+        END IF;
+        IF NOT EXISTS (SELECT 1 FROM roles WHERE name = 'ROLE_ADMIN') THEN
+            INSERT INTO roles (name) VALUES ('ROLE_ADMIN');
+        END IF;
+    END$$;
+
+
