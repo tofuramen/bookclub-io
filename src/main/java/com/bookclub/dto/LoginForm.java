@@ -1,8 +1,15 @@
 package com.bookclub.dto;
 
+import jakarta.validation.Valid;
+import lombok.Data;
+
+@Data
 public class LoginForm {
 
+    @Valid
     private String username;
+
+    @Valid
     private String password;
 
     // Getters and setters...

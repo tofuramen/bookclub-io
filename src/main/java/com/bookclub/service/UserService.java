@@ -21,6 +21,10 @@ public class UserService {
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     public User registerUser(User user) {
         // Optionally, check if the username or email is already taken.
         if (userRepository.existsByUsername(user.getUsername())) {
@@ -42,5 +46,9 @@ public class UserService {
         // Save the user entity and return the persisted instance
         return userRepository.save(user);
 
+    }
+
+    public User save(User user) {
+        return userRepository.save(user);
     }
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>User Profile - BookClub.io</title>
+    <link rel="stylesheet" th:href="@{/css/profile.css}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<header class="header">
+    <div class="logo">
+        <img th:src="@{/images/bookclub-logo.png}" alt="BookClub.io Logo" class="logo-img"/>
+        <span class="logo-text">BookClub.io</span>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Find a friend" />
+        <button type="submit"><i class="fas fa-search"></i></button>
+    </div>
+
+    <nav class="nav-icons">
+        <a th:href="@{/friends}" title="Friends">
+            <i class="fas fa-user-friends"></i>
+        </a>
+        <a th:href="@{/books}" title="Your Books">
+            <i class="fas fa-book"></i>
+        </a>
+        <a th:href="@{/settings}" title="Settings">
+            <i class="fas fa-cog"></i>
+        </a>
+    </nav>
+</header>
+
+<main>
+    <!-- Bind the form to the 'user' object from your model -->
+    <form th:action="@{/user/updateBio}" th:object="${user}" method="post">
+        <section class="profile-section">
+            <div class="profile-pic">
+                <img th:src="${user.profilePicUrl}" alt="Profile Picture" />
+            </div>
+            <h1 class="username" th:text="${user.username}">Default Username</h1>
+
+            <!-- Editable Bio Textarea -->
+            <label for="bio">Your Bio</label>
+            <textarea id="bio" th:field="*{bio}" rows="5" cols="50"
+                      placeholder="Write something about yourself..."></textarea>
+
+            <!-- Submit Button -->
+            <button type="submit">Save Bio</button>
+        </section>
+    </form>
+
+    <img th:src="${user.profilePicUrl}" alt="Profile Picture" />
+    <h1 th:text="${user.username}">Default Username</h1>
+    <p th:text="${user.bio}">Default bio here...</p>
+
+    <section class="currently-reading">
+        <h2>Currently Reading</h2>
+        <div class="book-list">
+            <div class="book-item" th:each="book : ${currentlyReading}">
+                <img th:src="${book.coverUrl}" th:alt="${book.title}" />
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>
