@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings - BookClub.io</title>
+    <link rel="stylesheet" th:href="@{/css/settings.css}">
+</head>
+<body>
+<header class="header">
+    <div class="logo">
+        <img th:src="@{/images/bookclub-logo.png}" alt="BookClub.io Logo" class="logo-img">
+        <span class="logo-text">BookClub.io</span>
+    </div>
+    <nav class="nav-icons">
+        <a th:href="@{/user/profile}" title="Profile"><i class="fas fa-user"></i></a>
+        <a th:href="@{/friends}" title="Friends"><i class="fas fa-user-friends"></i></a>
+        <a th:href="@{/books}" title="Books"><i class="fas fa-book"></i></a>
+    </nav>
+</header>
+
+<main>
+    <h1>Account Settings</h1>
+    <!-- Bind the form to your settings DTO (or User entity) -->
+    <form th:action="@{/settings}" th:object="${settings}" method="post" enctype="multipart/form-data">
+        <!-- Update Profile Picture Section -->
+        <section class="update-profile-picture">
+            <h2>Update Profile Picture</h2>
+            <label for="profilePicture">Choose a new profile picture:</label>
+            <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
+        </section>
+
+        <!-- Change Password Section -->
+        <section class="change-password">
+            <h2>Change Password</h2>
+            <div class="form-group">
+                <label for="currentPassword">Current Password:</label>
+                <input type="password" id="currentPassword" th:field="*{currentPassword}" placeholder="Enter current password">
+            </div>
+            <div class="form-group">
+                <label for="newPassword">New Password:</label>
+                <input type="password" id="newPassword" th:field="*{newPassword}" placeholder="Enter new password">
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm New Password:</label>
+                <input type="password" id="confirmPassword" th:field="*{confirmPassword}" placeholder="Confirm new password">
+            </div>
+        </section>
+
+        <!-- Edit Bio Section -->
+        <section class="edit-bio">
+            <h2>Edit Bio</h2>
+            <textarea id="bio" th:field="*{bio}" rows="5" placeholder="Write your bio here..."></textarea>
+        </section>
+
+        <button type="submit">Update Settings</button>
+    </form>
+</main>
+</body>
+</html>

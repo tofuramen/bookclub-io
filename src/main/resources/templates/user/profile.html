@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>User Profile - BookClub.io</title>
     <link rel="stylesheet" th:href="@{/css/profile.css}">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <header class="header">
@@ -33,35 +32,22 @@
 </header>
 
 <main>
-    <!-- Bind the form to the 'user' object from your model -->
-    <form th:action="@{/user/updateBio}" th:object="${user}" method="post">
-        <section class="profile-section">
-            <div class="profile-pic">
-                <img th:src="${user.profilePicUrl}" alt="Profile Picture" />
-            </div>
-            <h1 class="username" th:text="${user.username}">Default Username</h1>
-
-            <!-- Editable Bio Textarea -->
-            <label for="bio">Your Bio</label>
-            <textarea id="bio" th:field="*{bio}" rows="5" cols="50"
-                      placeholder="Write something about yourself..."></textarea>
-
-            <!-- Submit Button -->
-            <button type="submit">Save Bio</button>
-        </section>
-    </form>
-
-    <img th:src="${user.profilePicUrl}" alt="Profile Picture" />
-    <h1 th:text="${user.username}">Default Username</h1>
-    <p th:text="${user.bio}">Default bio here...</p>
+    <section class="profile-section">
+        <div class="profile-pic">
+            <img th:src="${user.profilePicUrl}" alt="Profile Picture" />
+        </div>
+        <h1 class="username" th:text="${user.username}">Default Username</h1>
+        <!-- Display bio as static text -->
+        <p class="bio" th:text="${user.bio}">Default bio here...</p>
+    </section>
 
     <section class="currently-reading">
         <h2>Currently Reading</h2>
         <div class="book-list">
-            <div class="book-item" th:each="book : ${currentlyReading}">
-                <img th:src="${book.coverUrl}" th:alt="${book.title}" />
-            </div>
-        </div>
+           <div class="book-item" th:each="book : ${currentlyReading}">
+               <img th:src="${book.coverUrl}" th:alt="${book.title}" />
+           </div>
+       </div>
     </section>
 </main>
 </body>

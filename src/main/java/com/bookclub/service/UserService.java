@@ -7,6 +7,11 @@ import com.bookclub.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -50,5 +55,26 @@ public class UserService {
 
     public User save(User user) {
         return userRepository.save(user);
+    }
+
+    public String uploadProfilePicture(MultipartFile profilePicture) {
+        String folder = "uploads/profile_pictures/";
+
+        // Create a unique filename based on a UUID and the original file name
+        String uniqueFileName = UUID.randomUUID().toString() + "_" + profilePicture.getOriginalFilename();
+        File destinationFile = new File(folder + uniqueFileName);
+
+        // Ensure the destination folder exists
+        destinationFile.getParentFile().mkdirs();
+
+        try {
+            // Transfer the file data to the destination file
+            profilePicture.transferTo(destinationFile);
+            // Return a URL (or relative path) to the uploaded file
+            return "/uploads/profile_pictures/" + uniqueFileName;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
